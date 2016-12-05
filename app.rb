@@ -3,7 +3,10 @@ require 'RMagick'
 require 'digest/sha1'
 
 get '/:color/:size/:text.png' do
-  color, text, size = params['color'], params['text'].upcase[0, 2], params['size'].to_i
+  color, text, size = params['color'].downcase, params['text'].upcase[0, 2], params['size'].to_i
+
+  # Hex codes
+  color = "##{color}" if color.length == 6 && color =~ /\A[a-f0-9]+\z/
 
   canvas = Magick::Image.new(size, size){ self.background_color = color }
   canvas.format = 'png'
