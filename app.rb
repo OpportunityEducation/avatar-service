@@ -9,6 +9,7 @@ get '/:color/:size/:text.png' do
   canvas.format = 'png'
   gc = Magick::Draw.new
   gc.pointsize = size / 2
+  gc.font = File.join(File.dirname(__FILE__), 'lib', 'fonts', 'Helvetica.ttf')
   gc.gravity = Magick::CenterGravity
   gc.annotate(canvas, 0,0,0,0, text) {
     self.fill = 'white'
