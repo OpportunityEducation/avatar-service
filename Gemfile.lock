@@ -1,12 +1,13 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    mini_magick (4.6.0)
     newrelic_rpm (3.17.1.326)
     puma (3.6.2)
+    puma (3.6.2-java)
     rack (1.6.5)
     rack-protection (1.5.3)
       rack
-    rmagick (2.16.0)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -14,16 +15,17 @@ GEM
     tilt (2.0.5)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
+  mini_magick
   newrelic_rpm
   puma
-  rmagick
   sinatra
 
 RUBY VERSION
-   ruby 2.3.3p222
+   ruby 2.3.1p0 (jruby 9.1.5.0)
 
 BUNDLED WITH
    1.13.6

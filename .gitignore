@@ -16,3 +16,4 @@
 
 # Vendored gems
 /vendor/ruby
+/vendor/jruby
