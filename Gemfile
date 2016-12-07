@@ -8,5 +8,8 @@ gem 'sinatra'
 # Image generation
 gem 'rmagick'
 
+# Monitoring
+gem 'newrelic_rpm'
+
 # Server
 gem 'puma'

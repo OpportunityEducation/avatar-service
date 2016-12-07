@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'newrelic_rpm'
 require 'RMagick'
 require 'digest/sha1'
 
