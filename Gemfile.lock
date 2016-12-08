@@ -1,12 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    mini_magick (4.6.0)
     newrelic_rpm (3.17.1.326)
     puma (3.6.2)
     rack (1.6.5)
     rack-protection (1.5.3)
       rack
-    rmagick (2.16.0)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -17,9 +17,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  mini_magick
   newrelic_rpm
   puma
-  rmagick
   sinatra
 
 RUBY VERSION

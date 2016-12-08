@@ -6,7 +6,7 @@ ruby '2.3.3'
 gem 'sinatra'
 
 # Image generation
-gem 'rmagick'
+gem 'mini_magick'
 
 # Monitoring
 gem 'newrelic_rpm'
