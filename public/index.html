@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar Service</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/pure-min.css"></head>
+    <script type="text/javascript">
+      var avatarPath = function(color, size, initials) {
+        return "/" + color + "/" + size + "/" + initials + ".png";
+      }
+
+      var updateImage = function(url) {
+        var src = document.getElementById("avatar");
+        var img = document.createElement("img");
+
+        img.src = url;
+
+        while (src.lastChild) {
+          src.removeChild(src.lastChild);
+        }
+
+        src.appendChild(img);
+      }
+
+      function generateImage() {
+        var color     = document.getElementById("color").value;
+        var size      = document.getElementById("size").value;
+        var initials  = document.getElementById("initials").value;
+
+        updateImage(avatarPath(color, size, initials));
+
+        return false;
+      }
+    </script>
+  <body>
+    <div id="generator">
+      <form method="post" onsubmit="return generateImage();" name='avatarGenerator' class="pure-form pure-form-stacked">
+        <fieldset>
+          <legend>Avatar Generator</legend>
+          <label for="color">Color</label>
+          <select name="color" id="color">
+            <option value="7569af">7569af</option>
+            <option value="211e71">211e71</option>
+            <option value="662d91">662d91</option>
+            <option value="dd4e9c">dd4e9c</option>
+            <option value="9e1f63">9e1f63</option>
+            <option value="da1c5c">da1c5c</option>
+            <option value="f15a29">f15a29</option>
+            <option value="d0181f">d0181f</option>
+            <option value="f4847a">f4847a</option>
+            <option value="006c92">006c92</option>
+            <option value="5f0050">5f0050</option>
+            <option value="002752">002752</option>
+          </select>
+          <label for="size">Size</label>
+          <select name="size" id="size">
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="400" selected="selected">400</option>
+          </select>
+          <label for="initials">Initials</label>
+          <input type="text" name="initials" id="initials" value="jr" /><br>
+          <input type="submit" value="Generate" class="pure-button pure-button-primary">
+        </fieldset>
+      </form>
+    </div>
+    <div id="avatar">
+    </div>
+  </body>
+</html>

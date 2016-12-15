@@ -3,6 +3,10 @@ require 'newrelic_rpm'
 require 'RMagick'
 require 'digest/sha1'
 
+get '/' do
+  File.read(File.join('public', 'index.html'))
+end
+
 get '/:color/:size/:text.png' do
   color, text, size = params['color'].downcase, params['text'].upcase[0, 2], params['size'].to_i
 
