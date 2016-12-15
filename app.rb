@@ -3,6 +3,8 @@ require 'newrelic_rpm'
 require 'RMagick'
 require 'digest/sha1'
 
+GC::Profiler.enable
+
 get '/' do
   File.read(File.join('public', 'index.html'))
 end
