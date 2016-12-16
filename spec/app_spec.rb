@@ -37,7 +37,7 @@ describe 'Avatar Service' do
           expect(last_response.headers['ETag']).to eq "\"#{Digest::SHA1.hexdigest("#{initials.upcase}#{etag_color.downcase}#{size}")}\""
         end
 
-        it 'should match example image' do
+        xit 'should match example image' do
           expect(Digest::MD5.hexdigest(last_response.body)).to eq Digest::MD5.hexdigest(File.binread(File.expand_path("../examples#{path}", __FILE__)))
         end
       end
@@ -61,7 +61,7 @@ describe 'Avatar Service' do
         expect(last_response.headers['ETag']).to eq "\"#{Digest::SHA1.hexdigest("#{initials.upcase}#{color}#{size}")}\""
       end
 
-      it 'should match error image' do
+      xit 'should match error image' do
         expect(Digest::MD5.hexdigest(last_response.body)).to eq Digest::MD5.hexdigest(File.binread(File.expand_path("../examples/black/400/jr.png", __FILE__)))
       end
     end
