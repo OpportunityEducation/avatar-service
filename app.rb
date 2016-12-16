@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'newrelic_rpm'
-require 'RMagick'
+require 'rmagick'
 require 'digest/sha1'
 
 GC::Profiler.enable
@@ -13,9 +13,14 @@ get '/:color/:size/:text.png' do
   color, text, size = params['color'].downcase, params['text'].upcase[0, 2], params['size'].to_i
 
   # Hex codes
-  color = "##{color}" if color.length == 6 && color =~ /\A[a-f0-9]+\z/
+  color = "##{color}" if color.length == 6 && color =~ /\A[a-f0-9]+\z/i
 
-  canvas = Magick::Image.new(size, size){ self.background_color = color }
+  begin
+    canvas = Magick::Image.new(size, size){ self.background_color = color }
+  rescue ArgumentError
+    canvas = Magick::Image.new(size, size){ self.background_color = 'black' }
+  end
+
   canvas.format = 'png'
   gc = Magick::Draw.new
   gc.pointsize = size / 2

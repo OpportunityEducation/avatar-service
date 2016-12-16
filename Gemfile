@@ -13,3 +13,9 @@ gem 'newrelic_rpm'
 
 # Server
 gem 'puma'
+
+# Testing
+group :test do
+  gem 'rack-test'
+  gem 'rspec'
+end
