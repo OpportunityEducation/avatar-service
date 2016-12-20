@@ -11,7 +11,7 @@ describe 'Avatar Service' do
   context 'avatars' do
     let(:size)      { 400 }
     let(:initials)  { 'jr' }
-    let(:path)      { "/#{color}/#{size}/#{initials}.png" }
+    let(:path)      { "/v2/#{color}/#{size}/#{initials}.png" }
 
     before(:each) do
       get path
