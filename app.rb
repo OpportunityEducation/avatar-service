@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'newrelic_rpm'
 require 'rmagick'
@@ -11,15 +13,19 @@ end
 
 ['', 'v2/', 'v3/'].each do |prefix|
   get "/#{prefix}:color/:size/:text.png" do
-    color, text, size = params['color'].downcase, params['text'].upcase[0, 2], params['size'].to_i
+    color = params['color'].downcase
+    text = params['text'].upcase[0, 2]
+    size = params['size'].to_i
 
     # Hex codes
     color = "##{color}" if color.length == 6 && color =~ /\A[a-f0-9]+\z/i
 
     begin
-      canvas = Magick::Image.new(size, size){ self.background_color = color; self.depth = 8; }
+      # rubocop:disable Style/Semicolon
+      canvas = Magick::Image.new(size, size) { self.background_color = color; self.depth = 8; }
+      # rubocop:enable Style/Semicolon
     rescue ArgumentError
-      canvas = Magick::Image.new(size, size){ self.background_color = 'black' }
+      canvas = Magick::Image.new(size, size) { self.background_color = 'black' }
     end
 
     canvas.format = 'png'
@@ -27,9 +33,9 @@ end
     gc.pointsize = (size / 2).ceil
     gc.font = File.join(File.dirname(__FILE__), 'lib', 'fonts', 'Roboto-Regular.ttf')
     gc.gravity = Magick::CenterGravity
-    gc.annotate(canvas, 0,0,0,0, text) {
+    gc.annotate(canvas, 0, 0, 0, 0, text) do
       self.fill = 'white'
-    }
+    end
 
     content_type 'image/png'
     cache_control :public, :must_revalidate, max_age: (365 * 24 * 60 * 60)
