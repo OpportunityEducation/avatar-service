@@ -1,4 +1,6 @@
-#Puma configuration file
+# frozen_string_literal: true
+
+# Puma configuration file
 
 workers Integer(ENV['WEB_CONCURRENCY'] || 2)
 threads_count = Integer(ENV['MAX_THREADS'] || 5)
