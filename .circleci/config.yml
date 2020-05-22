@@ -13,6 +13,9 @@ jobs:
           BUNDLE_PATH: vendor/bundle
           RAILS_ENV: test
     steps:
+    - add_ssh_keys:
+        fingerprints:
+          - "c5:96:bd:37:2e:d3:46:8d:84:35:71:22:5c:b4:b2:1b"
     - checkout
 
     # Prepare for artifact and test results
