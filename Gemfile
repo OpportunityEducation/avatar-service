@@ -18,4 +18,6 @@ gem 'puma'
 group :test do
   gem 'rack-test'
   gem 'rspec'
+  # CircleCI Likes this
+  gem 'rspec_junit_formatter'
 end
