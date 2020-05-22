@@ -4,7 +4,6 @@ jobs:
     parallelism: 1
     working_directory: ~/avatar-service
     environment:
-      CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
       - image: circleci/ruby:2.6.5-node
@@ -17,7 +16,7 @@ jobs:
     - checkout
 
     # Prepare for artifact and test results
-    - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
+    - run: mkdir -p $CIRCLE_TEST_REPORTS
 
     # Update rubygems
     - run: gem update --system
@@ -44,12 +43,6 @@ jobs:
 
     # Save test results
     - store_test_results:
-        path: /tmp/circleci-test-results
-
-    # Save artifacts
-    - store_artifacts:
-        path: /tmp/circleci-artifacts
-    - store_artifacts:
         path: /tmp/circleci-test-results
 
 workflows:
