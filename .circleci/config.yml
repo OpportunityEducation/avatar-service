@@ -27,15 +27,15 @@ jobs:
     # Restore the dependency cache (the 'v2' here is just the cache version, which needs to be bumped periodically)
     - restore_cache:
         keys:
-          - avatar-service-v2-{{ checksum "Gemfile.lock" }}
-          - avatar-service-v2-
+          - avatar-service-v3-{{ checksum "Gemfile.lock" }}
+          - avatar-service-v3-
 
     # Install gems
     - run: bundle check || bundle install --path vendor/bundle
 
     # Save dependency cache
     - save_cache:
-        key: avatar-service-v2-{{ checksum "Gemfile.lock" }}
+        key: avatar-service-v3-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
