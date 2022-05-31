@@ -25,18 +25,26 @@ jobs:
     # Update rubygems
     - run: gem update --system
 
-    # Restore the dependency cache (the 'v4' here is just the cache version, which needs to be bumped periodically)
+    # Restore the dependency cache (the 'v6' here is just the cache version, which needs to be bumped periodically)
     - restore_cache:
         keys:
-          - avatar-service-v4-{{ checksum "Gemfile.lock" }}
-          - avatar-service-v4-
+          - avatar-service-v6-{{ checksum "Gemfile.lock" }}
+          - avatar-service-v6-
 
     # Install gems
-    - run: bundle check || bundle install --path vendor/bundle
+    - run:
+        name: "Ruby dependencies: install"
+        command: |
+          set -x
+          bundle check --path=vendor/bundle && use_local="--local"
+          bundle install --path=vendor/bundle $use_local
+
+    # Clean bundle
+    - run: bundle clean --force
 
     # Save dependency cache
     - save_cache:
-        key: avatar-service-v4-{{ checksum "Gemfile.lock" }}
+        key: avatar-service-v6-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
