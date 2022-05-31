@@ -6,7 +6,7 @@ jobs:
     environment:
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-      - image: circleci/ruby:2.7.6-node
+      - image: cimg/ruby:3.0.4-node
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -17,6 +17,7 @@ jobs:
         fingerprints:
           - "c5:96:bd:37:2e:d3:46:8d:84:35:71:22:5c:b4:b2:1b"
     - checkout
+    - run: sudo apt-get update && sudo apt-get install -y imagemagick
 
     # Prepare for artifact and test results
     - run: mkdir -p $CIRCLE_TEST_REPORTS
@@ -24,18 +25,21 @@ jobs:
     # Update rubygems
     - run: gem update --system
 
-    # Restore the dependency cache (the 'v2' here is just the cache version, which needs to be bumped periodically)
+    # Restore the dependency cache (the 'v5' here is just the cache version, which needs to be bumped periodically)
     - restore_cache:
         keys:
-          - avatar-service-v3-{{ checksum "Gemfile.lock" }}
-          - avatar-service-v3-
+          - avatar-service-v5-{{ checksum "Gemfile.lock" }}
+          - avatar-service-v5-
 
     # Install gems
     - run: bundle check || bundle install --path vendor/bundle
 
+    # Clean bundle
+    - run: bundle clean --force
+
     # Save dependency cache
     - save_cache:
-        key: avatar-service-v3-{{ checksum "Gemfile.lock" }}
+        key: avatar-service-v5-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
