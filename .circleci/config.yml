@@ -17,7 +17,7 @@ jobs:
         fingerprints:
           - "c5:96:bd:37:2e:d3:46:8d:84:35:71:22:5c:b4:b2:1b"
     - checkout
-    - run: sudo apt-get update && sudo apt-get install -y rmagick
+    - run: sudo apt-get update && sudo apt-get install pkg-config && sudo apt-get install -y imagemagick
 
     # Prepare for artifact and test results
     - run: mkdir -p $CIRCLE_TEST_REPORTS
