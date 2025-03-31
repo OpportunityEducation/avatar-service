@@ -12,6 +12,7 @@ jobs:
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           RAILS_ENV: test
+    # TODO: change the fingerprints to the ones for the new SSH key which needs to be generated in the repo settings
     steps:
     - add_ssh_keys:
         fingerprints:
