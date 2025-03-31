@@ -6,7 +6,7 @@ jobs:
     environment:
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-      - image: circleci/ruby:3.1.6-node
+      - image: cimg/ruby:3.1.6-node
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
