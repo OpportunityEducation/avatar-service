@@ -6,12 +6,13 @@ jobs:
     environment:
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-      - image: circleci/ruby:2.7.6-node
+      - image: cimg/ruby:3.1.6-node
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           RAILS_ENV: test
+    # TODO: change the fingerprints to the ones for the new SSH key which needs to be generated in the repo settings
     steps:
     - add_ssh_keys:
         fingerprints:
@@ -27,15 +28,15 @@ jobs:
     # Restore the dependency cache (the 'v2' here is just the cache version, which needs to be bumped periodically)
     - restore_cache:
         keys:
-          - avatar-service-v3-{{ checksum "Gemfile.lock" }}
-          - avatar-service-v3-
+          - avatar-service-v4-{{ checksum "Gemfile.lock" }}
+          - avatar-service-v4-
 
     # Install gems
     - run: bundle check || bundle install --path vendor/bundle
 
     # Save dependency cache
     - save_cache:
-        key: avatar-service-v3-{{ checksum "Gemfile.lock" }}
+        key: avatar-service-v4-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
